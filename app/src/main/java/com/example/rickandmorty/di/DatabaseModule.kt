@@ -26,4 +26,15 @@ object DatabaseModule {
             CHARACTER_DATABASE
         ).build()
     }
+
+    @Provides
+    @Singleton
+    fun provideInMemoryDatabase(
+        @ApplicationContext context: Context
+    ): CharacterDataBase {
+        return Room.inMemoryDatabaseBuilder(
+            context,
+            CharacterDataBase::class.java
+        ).build()
+    }
 }

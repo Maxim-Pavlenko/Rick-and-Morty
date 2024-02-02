@@ -11,5 +11,5 @@ import com.example.rickandmorty.emtities.CharacterKeys
 abstract class CharacterDataBase: RoomDatabase() {
 
     abstract fun characterDao(): CharacterDao
-    abstract fun characterKeys(): CharacterKeysDao
+    abstract fun characterKeysDao(): CharacterKeysDao
 }

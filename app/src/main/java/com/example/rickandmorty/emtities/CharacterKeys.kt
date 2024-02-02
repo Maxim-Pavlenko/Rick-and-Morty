@@ -7,7 +7,7 @@ import com.example.rickandmorty.util.Constants.CHARACTER_KEYS_TABLE
 @Entity(tableName = CHARACTER_KEYS_TABLE)
 data class CharacterKeys (
     @PrimaryKey(autoGenerate = false)
-    val id: String,
+    val id: Int,
     val prevPage: Int?,
     val nextPage: Int?
 )

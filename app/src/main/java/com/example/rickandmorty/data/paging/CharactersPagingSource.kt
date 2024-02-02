@@ -1,3 +1,4 @@
+/*
 package com.example.rickandmorty.data.paging
 
 import androidx.paging.Pager
@@ -14,7 +15,7 @@ class CharactersPagingSource : PagingSource<Int, Character>() {
 
     override suspend fun load(params: LoadParams<Int>): LoadResult<Int, Character> =
         kotlin.runCatching {
-            RetrofitInstance.charactersAPI.getCharacter(params.key ?: 0)
+            RetrofitInstance.charactersAPI.getCharacters(params.key ?: 0)
         }.fold(
             onSuccess = {
                 LoadResult.Page(
@@ -34,4 +35,4 @@ class CharactersPagingSource : PagingSource<Int, Character>() {
             pagingSourceFactory = { CharactersPagingSource() }
         )
     }
-}
+}*/

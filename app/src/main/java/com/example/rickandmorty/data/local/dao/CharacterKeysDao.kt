@@ -9,7 +9,7 @@ import com.example.rickandmorty.emtities.CharacterKeys
 @Dao
 interface CharacterKeysDao {
     @Query("SELECT * FROM character_keys_table WHERE id =:id")
-    suspend fun getRemoteKeys(id: String): CharacterKeys
+    suspend fun getRemoteKeys(id: Int): CharacterKeys
 
     @Insert(onConflict = OnConflictStrategy.REPLACE)
     suspend fun addAllRemoteKeys(remoteKeys: List<CharacterKeys>)
