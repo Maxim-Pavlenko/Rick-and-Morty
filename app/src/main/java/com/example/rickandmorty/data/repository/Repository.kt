@@ -16,11 +16,15 @@ class Repository @Inject constructor(
 ) {
     @OptIn(ExperimentalPagingApi::class)
     fun getAllCharacters(): Flow<PagingData<Character>> {
-        val pagingSourceFactory = {characterDataBase.characterDao().getAllCharacters()}
+        val pagingSourceFactory = { characterDataBase.characterDao().getAllCharacters()}
         return Pager(
             config = PagingConfig(pageSize = ITEMS_PER_PAGE),
             remoteMediator = CharacterRemoteMediator(characterDataBase = characterDataBase),
             pagingSourceFactory = pagingSourceFactory
         ).flow
+    }
+
+    suspend fun getCharacter(characterId: Int): Character {
+        return characterDataBase.characterDao().getCharacter(characterId)
     }
 }

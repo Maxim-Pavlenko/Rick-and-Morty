@@ -16,7 +16,7 @@ class MainActivity : ComponentActivity() {
         setContent {
             val navController = rememberNavController()
             RickandMortyTheme {
-                SetupNavGraph(navController)
+                SetupNavGraph(navController = navController)
             }
         }
     }

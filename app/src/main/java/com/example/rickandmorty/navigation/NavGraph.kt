@@ -4,7 +4,8 @@ import androidx.compose.runtime.Composable
 import androidx.navigation.NavHostController
 import androidx.navigation.compose.NavHost
 import androidx.navigation.compose.composable
-import com.example.rickandmorty.screens.HomeScreen
+import com.example.rickandmorty.screens.Details.PersonDetails
+import com.example.rickandmorty.screens.home.HomeScreen
 
 @Composable
 fun SetupNavGraph(navController: NavHostController) {
@@ -12,12 +13,14 @@ fun SetupNavGraph(navController: NavHostController) {
         navController = navController,
         startDestination = Screen.Home.route
     ) {
-
         composable(route = Screen.Home.route) {
-            HomeScreen(navController)
+            HomeScreen(navController = navController)
         }
-        composable(route = Screen.Details.route) {
-
+        composable(route = Screen.Details.route) { backStackEntry ->
+            val characterId = backStackEntry.arguments?.getString("characterID")?.toInt()
+            characterId?.let {
+                PersonDetails(characterId)
+            }
         }
     }
 }

@@ -29,6 +29,7 @@ class CharacterRemoteMediator @Inject constructor(
         state: PagingState<Int, Character>
     ): MediatorResult {
         return try {
+            // Получаем текущую страницу
             val currentPage = when(loadType) {
                 // Обнавление источника подкачки
                 LoadType.REFRESH -> {
@@ -69,8 +70,8 @@ class CharacterRemoteMediator @Inject constructor(
                     characterKeysDao.deleteAllRemoteKeys()
                 }
                 val keys = response.results.map { character ->
-                    CharacterKeys(
-                        id = character.id,
+                    CharacterKeys (
+                        id = character.id!!,
                         prevPage = prevPage,
                         nextPage = nextPage
                     )
@@ -95,14 +96,14 @@ class CharacterRemoteMediator @Inject constructor(
     private suspend fun getRemoteKeyForFirstItem(state: PagingState<Int, Character>): CharacterKeys? {
         return state.pages.firstOrNull {it.data.isNotEmpty()}?.data?.firstOrNull()
             ?.let { character ->
-                characterKeysDao.getRemoteKeys(id = character.id)
+                characterKeysDao.getRemoteKeys(id = character.id!!)
             }
     }
 
     private suspend fun getRemoteKeyForLastItem(state: PagingState<Int, Character>): CharacterKeys? {
         return state.pages.lastOrNull{it.data.isNotEmpty()}?.data?.lastOrNull()
             ?.let { character ->
-                characterKeysDao.getRemoteKeys(id = character.id)
+                characterKeysDao.getRemoteKeys(id = character.id!!)
             }
     }
 }

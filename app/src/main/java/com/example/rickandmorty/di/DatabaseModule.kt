@@ -20,21 +20,9 @@ object DatabaseModule {
     fun provideDatabase(
         @ApplicationContext context: Context
     ): CharacterDataBase {
-        return Room.databaseBuilder(
-            context,
-            CharacterDataBase::class.java,
-            CHARACTER_DATABASE
-        ).build()
-    }
-
-    @Provides
-    @Singleton
-    fun provideInMemoryDatabase(
-        @ApplicationContext context: Context
-    ): CharacterDataBase {
         return Room.inMemoryDatabaseBuilder(
             context,
-            CharacterDataBase::class.java
+            CharacterDataBase::class.java,
         ).build()
     }
 }

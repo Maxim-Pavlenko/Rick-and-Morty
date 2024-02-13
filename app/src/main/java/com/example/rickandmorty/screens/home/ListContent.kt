@@ -1,6 +1,7 @@
-package com.example.rickandmorty.screens.common
+package com.example.rickandmorty.screens.home
 
 import androidx.compose.foundation.Image
+import androidx.compose.foundation.clickable
 import androidx.compose.foundation.layout.Arrangement
 import androidx.compose.foundation.layout.Column
 import androidx.compose.foundation.layout.PaddingValues
@@ -11,82 +12,85 @@ import androidx.compose.foundation.layout.fillMaxWidth
 import androidx.compose.foundation.layout.padding
 import androidx.compose.foundation.layout.size
 import androidx.compose.foundation.lazy.LazyColumn
-import androidx.compose.foundation.lazy.items
 import androidx.compose.material3.Card
 import androidx.compose.material3.CardDefaults
+import androidx.compose.material3.Surface
 import androidx.compose.material3.Text
 import androidx.compose.runtime.Composable
 import androidx.compose.ui.Modifier
-import androidx.compose.ui.graphics.Color
 import androidx.compose.ui.res.painterResource
+import androidx.compose.ui.tooling.preview.Preview
 import androidx.compose.ui.unit.dp
-import androidx.paging.PagingData
 import androidx.paging.compose.LazyPagingItems
-import androidx.paging.compose.collectAsLazyPagingItems
+import androidx.paging.compose.itemKey
+import coil.compose.rememberAsyncImagePainter
 import com.example.recyclerview_advanced.entities.Character
 import com.example.rickandmorty.R
-import kotlinx.coroutines.flow.Flow
-
-
-/*
-private val pageData by lazy { CharactersPagingSource.pager() }*/
-
-/* Данное преобразование позволит нам преобразовать в ленивую загрузку элементов и
-    Composable представлений состояний. Таким образом, полученное состояние позволит сигнализировать
-    о том, что список обнавился и данные в JetPack Compose необходимо отобразить */
-
-/*
-val items: LazyPagingItems<Character> = pageData.flow.collectAsLazyPagingItems()
-*/
+import com.example.rickandmorty.ui.theme.DarkGreen
+import com.example.rickandmorty.ui.theme.DarkGreen2
+import com.example.rickandmorty.ui.theme.Moonstone
 
 @Composable
-fun ListContent(items: Flow<PagingData<Character>>) {
-    val lazyItems = items.collectAsLazyPagingItems()
-    LazyColumn(
-        modifier = Modifier.fillMaxSize(),
-        contentPadding = PaddingValues(all = 12.dp),
-        verticalArrangement = Arrangement.spacedBy(12.dp)
+fun ListContent(
+    lazyPagingItems: LazyPagingItems<Character>,
+    onClick: (Character) -> Unit
+) {
+    Surface (
+        color = DarkGreen
     ) {
-        items(
-            items = lazyItems,
-            key = { character ->
-                character.id
+        LazyColumn(
+            modifier = Modifier.fillMaxSize(),
+            contentPadding = PaddingValues(all = 12.dp),
+            verticalArrangement = Arrangement.spacedBy(12.dp)
+        ) {
+            items(
+                count = lazyPagingItems.itemCount,
+                key = lazyPagingItems.itemKey{ it.id!! }
+            ) { index ->
+                lazyPagingItems[index]?.let {
+                    Characters(it, onClick)
+                }
             }
-        ) { character ->
-            character?.let { Characters(character) }
         }
     }
 }
 
 
 @Composable
-fun Characters(character: Character) {
+fun Characters(
+    character: Character,
+    onClick: (Character) -> Unit
+) {
     Card(
         colors = CardDefaults.cardColors(
-            contentColor = Color.Gray
+            containerColor = DarkGreen2,
+            contentColor = Moonstone
         ),
         modifier = Modifier
             .fillMaxWidth()
             .padding(10.dp)
+            .clickable(onClick = { onClick(character) })
     ) {
         Row {
             Image(
-                painter = painterResource(
-                    id = R.drawable.ic_launcher_background
-                ),
-                contentDescription = "image",
+                painter = rememberAsyncImagePainter(model = character.image),
+                contentDescription = null,
                 modifier = Modifier.size(150.dp)
             )
             Spacer(modifier = Modifier.padding(start = 10.dp))
-            Information()
+            Information(character)
         }
     }
 }
 
+
 @Composable
-private fun Information() {
+private fun Information(character: Character) {
     Column {
-        Text(text = "name")
+        Text (
+            text = character.name ?: "",
+            modifier = Modifier.padding(top = 10.dp)
+        )
         Row(modifier = Modifier.padding(top = 10.dp)) {
             Image(
                 painter = painterResource(id = R.drawable.circle),
@@ -94,14 +98,14 @@ private fun Information() {
                 modifier = Modifier.size(width = 10.dp, height = 19.dp)
             )
             Spacer(modifier = Modifier.size(10.dp))
-            Text(text = "gender")
+            Text(text = character.gender ?: "")
         }
         Text(
-            text = "location",
+            text = character.location?.name ?: "",
             modifier = Modifier.padding(top = 10.dp)
         )
         Text(
-            text = "lastLocation",
+            text =character.species ?: "",
             modifier = Modifier.padding(top = 10.dp)
         )
     }
