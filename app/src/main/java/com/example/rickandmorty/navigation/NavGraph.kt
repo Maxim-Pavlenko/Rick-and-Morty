@@ -17,9 +17,9 @@ fun SetupNavGraph(navController: NavHostController) {
             HomeScreen(navController = navController)
         }
         composable(route = Screen.Details.route) { backStackEntry ->
-            val characterId = backStackEntry.arguments?.getString("characterID")?.toInt()
+            val characterId = backStackEntry.arguments?.getString("characterID")
             characterId?.let {
-                PersonDetails(characterId)
+                PersonDetails(characterId.toInt())
             }
         }
     }

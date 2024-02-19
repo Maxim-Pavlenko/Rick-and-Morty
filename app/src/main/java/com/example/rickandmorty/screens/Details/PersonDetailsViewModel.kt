@@ -2,8 +2,6 @@ package com.example.rickandmorty.screens.Details
 
 import androidx.lifecycle.ViewModel
 import androidx.lifecycle.viewModelScope
-import androidx.lifecycle.viewmodel.compose.viewModel
-import androidx.paging.PagingData
 import com.example.recyclerview_advanced.entities.Character
 import com.example.rickandmorty.data.repository.Repository
 import dagger.hilt.android.lifecycle.HiltViewModel
@@ -18,9 +16,9 @@ class PersonDetailsViewModel @Inject constructor(
     private val repository: Repository
 ):ViewModel() {
 
-    private val _characters = MutableStateFlow<Character>(Character())
-    val character: StateFlow<Character> = _characters.asStateFlow()
-    fun getCharacter(id: Int): Character {
+    private val _characters: MutableStateFlow<Character?> = MutableStateFlow(null)
+    val character: StateFlow<Character?> = _characters.asStateFlow()
+    fun getCharacter(id: Int) {
         viewModelScope.launch {
             _characters.value = repository.getCharacter(id)
         }

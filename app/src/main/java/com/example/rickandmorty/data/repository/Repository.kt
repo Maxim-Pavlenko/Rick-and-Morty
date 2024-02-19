@@ -1,5 +1,6 @@
 package com.example.rickandmorty.data.repository
 
+import android.util.Log
 import androidx.paging.ExperimentalPagingApi
 import androidx.paging.Pager
 import androidx.paging.PagingConfig
@@ -25,6 +26,8 @@ class Repository @Inject constructor(
     }
 
     suspend fun getCharacter(characterId: Int): Character {
-        return characterDataBase.characterDao().getCharacter(characterId)
+        val result = characterDataBase.characterDao().getCharacter(characterId)
+        Log.d("CHARACTER_REPOSITORY", "$result")
+        return result
     }
 }

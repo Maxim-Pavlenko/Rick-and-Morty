@@ -19,7 +19,6 @@ import androidx.compose.material3.Text
 import androidx.compose.runtime.Composable
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.res.painterResource
-import androidx.compose.ui.tooling.preview.Preview
 import androidx.compose.ui.unit.dp
 import androidx.paging.compose.LazyPagingItems
 import androidx.paging.compose.itemKey
@@ -28,7 +27,7 @@ import com.example.recyclerview_advanced.entities.Character
 import com.example.rickandmorty.R
 import com.example.rickandmorty.ui.theme.DarkGreen
 import com.example.rickandmorty.ui.theme.DarkGreen2
-import com.example.rickandmorty.ui.theme.Moonstone
+import com.example.rickandmorty.ui.theme.White
 
 @Composable
 fun ListContent(
@@ -64,7 +63,7 @@ fun Characters(
     Card(
         colors = CardDefaults.cardColors(
             containerColor = DarkGreen2,
-            contentColor = Moonstone
+            contentColor = White
         ),
         modifier = Modifier
             .fillMaxWidth()

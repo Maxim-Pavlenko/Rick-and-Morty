@@ -14,7 +14,7 @@ fun HomeScreen(
     homeViewModel: HomeViewModel = hiltViewModel()
 ) {
     val onClick: (Character) -> Unit = {
-        navController.navigate("${Screen.Details.route}/$it.id")
+        navController.navigate("details_screen/${it.id}")
     }
 
     LaunchedEffect(key1 = Unit) {

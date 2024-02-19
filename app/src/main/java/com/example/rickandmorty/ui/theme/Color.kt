@@ -12,4 +12,4 @@ val Pink40 = Color(0xFF7D5260)
 
 val DarkGreen = Color(0xFF01161E)
 val DarkGreen2 = Color(0xFF124559)
-val Moonstone = Color(0xFFEFF6E0)
+val White = Color(0xFFFFFFFF)
