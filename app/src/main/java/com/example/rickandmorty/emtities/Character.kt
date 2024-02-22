@@ -14,17 +14,17 @@ import kotlinx.serialization.Serializable
 data class Character(
     @PrimaryKey(autoGenerate = false)
     val id: Int? = null,
-    val name: String? = null,
-    val status: String? = null,
-    val species: String? = null,
-    val type: String? = null,
-    val gender: String? = null,
+    val name: String = "",
+    val status: String = "",
+    val species: String = "",
+    val type: String = "",
+    val gender: String = "",
     @Embedded(prefix = "origin_")
     val origin: Origin? = null,
     @Embedded(prefix = "location_")
     val location: Location? = null,
-    val image: String? = null,
+    val image: String = "",
     val episode: List<String> = emptyList(),
-    val url: String? = null,
-    val created: String? = null
+    val url: String = "",
+    val created: String = ""
 )

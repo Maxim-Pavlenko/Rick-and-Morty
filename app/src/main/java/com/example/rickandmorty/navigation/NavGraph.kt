@@ -13,9 +13,11 @@ fun SetupNavGraph(navController: NavHostController) {
         navController = navController,
         startDestination = Screen.Home.route
     ) {
+
         composable(route = Screen.Home.route) {
             HomeScreen(navController = navController)
         }
+
         composable(route = Screen.Details.route) { backStackEntry ->
             val characterId = backStackEntry.arguments?.getString("characterID")
             characterId?.let {

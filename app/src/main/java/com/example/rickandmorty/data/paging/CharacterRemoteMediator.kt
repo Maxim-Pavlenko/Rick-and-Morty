@@ -16,7 +16,6 @@ import javax.inject.Inject
 
 
 
-@Suppress("IMPLICIT_CAST_TO_ANY")
 @OptIn(ExperimentalPagingApi::class)
 class CharacterRemoteMediator @Inject constructor(
     private val characterDataBase: CharacterDataBase

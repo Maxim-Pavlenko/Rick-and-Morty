@@ -13,8 +13,8 @@ fun HomeScreen(
     navController: NavController,
     homeViewModel: HomeViewModel = hiltViewModel()
 ) {
-    val onClick: (Character) -> Unit = {
-        navController.navigate("details_screen/${it.id}")
+    val onClick: (Character) -> Unit = { character ->
+        navController.navigate("details_screen/${character.id}")
     }
 
     LaunchedEffect(key1 = Unit) {

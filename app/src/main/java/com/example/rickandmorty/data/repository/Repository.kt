@@ -8,8 +8,11 @@ import androidx.paging.PagingData
 import com.example.recyclerview_advanced.entities.Character
 import com.example.rickandmorty.data.local.CharacterDataBase
 import com.example.rickandmorty.data.paging.CharacterRemoteMediator
+import com.example.rickandmorty.data.remote.RetrofitInstance
+import com.example.rickandmorty.emtities.Episode
 import com.example.rickandmorty.util.Constants.ITEMS_PER_PAGE
 import kotlinx.coroutines.flow.Flow
+import retrofit2.Retrofit
 import javax.inject.Inject
 
 class Repository @Inject constructor(
@@ -26,8 +29,10 @@ class Repository @Inject constructor(
     }
 
     suspend fun getCharacter(characterId: Int): Character {
-        val result = characterDataBase.characterDao().getCharacter(characterId)
-        Log.d("CHARACTER_REPOSITORY", "$result")
-        return result
+        return characterDataBase.characterDao().getCharacter(characterId)
+    }
+
+    suspend fun getEpisod(episodeNumbers: List<Int>): List<Episode> {
+        return RetrofitInstance.charactersAPI.getEpisods(episodeNumbers)
     }
 }
